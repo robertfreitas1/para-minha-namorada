@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido de Namoro</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ff7a8a, #ffb3b3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            position: relative;
+            overflow: hidden; /* Evita barras de rolagem */
+        }
+
+        /* Caixa central com a pergunta */
+        .box {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+            max-width: 90%;
+            animation: boxSlideIn 1s ease-out forwards;
+        }
+
+        .box h1 {
+            font-size: 24px;
+            color: #ff69b4;
+            margin-bottom: 20px;
+        }
+
+        /* Botões no centro da tela */
+        .options {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            bottom: 100px; /* Distância de baixo para os botões */
+            width: 100%;
+        }
+
+        .button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #ff69b4;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 0 15px;
+            position: relative;
+        }
+
+        .button:hover {
+            background-color: #ff3b72;
+        }
+
+        /* Animação da caixa */
+        @keyframes boxSlideIn {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Mensagem de amor */
+        .message {
+            display: none;
+            font-size: 28px;
+            color: #ff69b4;
+            font-weight: bold;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeInMessage 2s forwards;
+        }
+
+        @keyframes fadeInMessage {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>Quer namorar comigo?</h1>
+        <div class="message" id="message">Eu sabia que você diria sim! 💖</div>
+    </div>
+
+    <div class="options">
+        <button class="button" id="yes">Sim</button>
+        <button class="button" id="no">Não</button>
+    </div>
+
+    <script>
+        document.getElementById('yes').addEventListener('click', function() {
+            document.getElementById('message').style.display = 'block'; // Exibe a mensagem se clicar em "Sim"
+            document.getElementById('message').style.animation = 'fadeInMessage 2s forwards'; // Animação da mensagem
+        });
+
+        document.getElementById('no').addEventListener('click', function() {
+            // Nada acontece se clicar em "Não", a página não se move
+            alert("Tudo bem, sem pressa! 😉");
+        });
+
+        // Função para mover o botão "Não" de forma aleatória dentro da área visível
+        document.getElementById('no').addEventListener('mouseover', function() {
+            var buttonWidth = this.offsetWidth;  // Largura do botão
+            var buttonHeight = this.offsetHeight;  // Altura do botão
+            var maxX = window.innerWidth - buttonWidth; // Limite da largura (considera o tamanho do botão)
+            var maxY = window.innerHeight - buttonHeight; // Limite da altura (considera o tamanho do botão)
+
+            // Gerar posições aleatórias dentro da tela, sem ultrapassar os limites
+            var randomX = Math.floor(Math.random() * maxX);
+            var randomY = Math.floor(Math.random() * maxY);
+
+            // Mover o botão "Não"
+            this.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        });
+    </script>
+</body>
+</html>
+
